@@ -1,6 +1,6 @@
 # Distributed Benchmarking and Hosting Platform
 
-A high-throughput, native-isolation distributed benchmarking platform engineered for the IICPC Summer Hackathon. Designed by a graduating systems engineering student, this platform rigorously evaluates competitive quantitative trading algorithms under simulated peak market volatility.
+A high-throughput, native-isolation distributed benchmarking platform engineered for the IICPC Summer Trading Hackathon 2026. This platform rigorously evaluates competitive quantitative trading algorithms under simulated peak market volatility.
 
 [![C++20](https://img.shields.io/badge/C++-20-blue.svg)](https://isocpp.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
