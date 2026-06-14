@@ -60,9 +60,7 @@ The platform is orchestrated entirely via open-source tools to ensure environmen
 
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/yourusername/iicpc-benchmark-platform.git](https://github.com/yourusername/iicpc-benchmark-platform.git)
-cd iicpc-benchmark-platform
-
+git clone [ https://github.com/aanalpatil24/IICPC-Summer-Tading-Hackathon-2026.git](https://github.com/aanalpatil24/IICPC-Summer-Tading-Hackathon-2026.git)
 # 2. Start the backing infrastructure (Redis & PostgreSQL)
 docker-compose up -d redis postgres
 
