@@ -1,0 +1,16 @@
+syntax = "proto3";
+package iicpc.telemetry;
+
+message QueryRequest {
+    string benchmark_id = 1;
+}
+
+message AggregateScore {
+    string submission_id = 1;
+    double composite_score = 2;
+}
+
+service TelemetryService {
+    rpc GetAggregateScore(QueryRequest) returns (AggregateScore);
+}
+

@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: iicpc
+      POSTGRES_PASSWORD: iicpc
+      POSTGRES_DB: telemetry
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/migrations:/docker-entrypoint-initdb.d
+      - pg_data:/var/lib/postgresql/data
+
+  submission-engine:
+    build:
+      context: .
+      dockerfile: docker/submission-engine.Dockerfile
+    ports:
+      - "50051:50051"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    privileged: true
+    cgroupns_mode: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+
+  bot-fleet:
+    build:
+      context: .
+      dockerfile: docker/bot-fleet.Dockerfile
+    ports:
+      - "50052:50052"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+      - submission-engine
+
+  telemetry-ingester:
+    build:
+      context: .
+      dockerfile: docker/telemetry-ingester.Dockerfile
+    ports:
+      - "50053:50053"
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=postgres
+    depends_on:
+      - redis
+      - postgres
+
+  leaderboard:
+    build:
+      context: .
+      dockerfile: docker/leaderboard.Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
+  pg_data:
+

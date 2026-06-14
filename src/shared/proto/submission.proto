@@ -1,0 +1,29 @@
+syntax = "proto3";
+package iicpc.submission;
+
+message SubmissionRequest {
+    string team_id = 1;
+    string source_code = 2;
+}
+
+message SubmissionResponse {
+    string submission_id = 1;
+    string status = 2;
+}
+
+message DeployRequest {
+    string submission_id = 1;
+}
+
+message DeployResponse {
+    string submission_id = 1;
+    string container_id = 2;
+    string endpoint_url = 3;
+    string status = 4;
+}
+
+service SubmissionService {
+    rpc Submit(SubmissionRequest) returns (SubmissionResponse);
+    rpc Deploy(DeployRequest) returns (DeployResponse);
+}
+

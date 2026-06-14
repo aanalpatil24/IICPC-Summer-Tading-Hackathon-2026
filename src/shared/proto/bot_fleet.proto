@@ -1,0 +1,26 @@
+syntax = "proto3";
+package iicpc.botfleet;
+
+message BotConfig {
+    string bot_id = 1;
+    string endpoint_url = 2;
+    int32 concurrency = 3;
+    int64 orders_per_second = 4;
+    int64 duration_seconds = 5;
+}
+
+message SpawnRequest {
+    string benchmark_id = 1;
+    repeated BotConfig bots = 2;
+}
+
+message SpawnResponse {
+    string benchmark_id = 1;
+    repeated string bot_ids = 2;
+    bool success = 3;
+}
+
+service BotFleetService {
+    rpc SpawnBots(SpawnRequest) returns (SpawnResponse);
+}
+
