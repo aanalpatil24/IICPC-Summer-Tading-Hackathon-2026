@@ -24,7 +24,7 @@ Programming Conclave (IICPC)
 
 ## 1. System Overview
 
-The IICPC Distributed Benchmarking Platform is a high-performance, low-latency evaluation engine designed to rigorously test contestant-submitted quantitative trading infrastructure. Evaluating simulated matching engines requires strict deterministic latency, massive concurrency, and absolute execution security.
+The Distributed Benchmarking and Hosting Platform is a high-performance, low-latency evaluation engine designed to rigorously test contestant-submitted quantitative trading infrastructure. Evaluating simulated matching engines requires strict deterministic latency, massive concurrency, and absolute execution security.
 
 To achieve this, we architected a 4-part distributed microservices pipeline. Crucially, we made the deliberate architectural decision to bypass bloated commercial cloud orchestrators (e.g., Managed Kafka, Kubernetes, AWS Fargate). Instead, we built a lean, bare-metal optimized system leveraging **C++20** for the execution critical path, **Redis Streams** for ultra-fast Inter-Process Communication (IPC), native **Linux POSIX mechanics** for sandboxing, and **Node.js** for asynchronous web broadcasting.
 
